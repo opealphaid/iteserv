@@ -85,11 +85,28 @@ public class ServerRequestForm {
     @JoinColumn(name = "asigned_to")
     private User asignedTo;
 
-    @Column(name = "status_form", length = Integer.MAX_VALUE)
-    private String statusForm;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status_form")
+    private StatusForm statusForm;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "updated_at")
     private Instant updatedAt;
+
+    @Column(name = "supervisor_approved_at")
+    private Instant supervisorApprovedAt;
+
+    @Column(name = "it_approved_at")
+    private Instant itApprovedAt;
+
+    @Column(name = "supervisor_comments", length = Integer.MAX_VALUE)
+    private String supervisorComments;
+
+    @Column(name = "it_comments", length = Integer.MAX_VALUE)
+    private String itComments;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "server_it_info")
+    private ServerItInfo serverItInfo;
 
 }

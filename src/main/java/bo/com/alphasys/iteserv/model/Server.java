@@ -71,4 +71,34 @@ public class Server {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
+    @Column(name = "server_ram", nullable = false, length = Integer.MAX_VALUE)
+    private String serverRam;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "so_language", nullable = false)
+    private Language soLanguage;
+
+    @Column(name = "hard_disk_units", nullable = false)
+    private Integer hardDiskUnits;
+
+    @Column(name = "hard_disk_size", length = Integer.MAX_VALUE)
+    private String hardDiskSize;
+
+    @Column(name = "server_cores", nullable = false, length = Integer.MAX_VALUE)
+    private String serverCores;
+
+    @Column(name = "network_card_units", nullable = false)
+    private Integer networkCardUnits;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "backup_type", nullable = false)
+    private BackupType backupType;
+
+    @Column(name = "data_backup_route", length = Integer.MAX_VALUE)
+    private String dataBackupRoute;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cod_request")
+    private ServerRequestForm codRequest;
+
 }
