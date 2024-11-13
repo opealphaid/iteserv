@@ -14,7 +14,6 @@ import java.time.Instant;
 public class ServerType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('server_type_id_server_type_seq')")
     @Column(name = "id_server_type", nullable = false)
     private Integer id;
 
