@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 
@@ -13,7 +15,7 @@ import java.time.Instant;
 @Table(name = "departments")
 public class Department {
     @Id
-    @ColumnDefault("nextval('departments_id_department_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_department", nullable = false)
     private Integer id;
 
@@ -27,11 +29,11 @@ public class Department {
     @Column(name = "status", nullable = false)
     private Boolean status = false;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @CreationTimestamp
     @Column(name = "created_at")
     private Instant createdAt;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Instant updatedAt;
 

@@ -1,11 +1,10 @@
 package bo.com.alphasys.iteserv.model;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -16,7 +15,7 @@ import java.time.LocalDate;
 @Table(name = "software_licenses")
 public class SoftwareLicens {
     @Id
-    @ColumnDefault("nextval('software_licenses_license_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "license_id", nullable = false)
     private Integer id;
 
@@ -44,11 +43,11 @@ public class SoftwareLicens {
     @JoinColumn(name = "status")
     private LicencesStatus status;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @CreationTimestamp
     @Column(name = "created_at")
     private Instant createdAt;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Instant updatedAt;
 

@@ -1,12 +1,11 @@
 package bo.com.alphasys.iteserv.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 
@@ -16,7 +15,7 @@ import java.time.Instant;
 @Table(name = "server_purpose")
 public class ServerPurpose {
     @Id
-    @ColumnDefault("nextval('server_purpose_id_server_purpose_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_server_purpose", nullable = false)
     private Integer id;
 
@@ -26,11 +25,11 @@ public class ServerPurpose {
     @Column(name = "status")
     private Boolean status;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @CreationTimestamp
     @Column(name = "created_at")
     private Instant createdAt;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Instant updatedAt;
 

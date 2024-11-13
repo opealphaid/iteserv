@@ -13,7 +13,7 @@ import java.time.Instant;
 @Table(name = "server_request_history")
 public class ServerRequestHistory {
     @Id
-    @ColumnDefault("nextval('server_request_history_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -30,6 +30,9 @@ public class ServerRequestHistory {
 
     @Column(name = "comments", length = Integer.MAX_VALUE)
     private String comments;
+
+    @Column(name = "status")
+    private Boolean status;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "action_date")

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 
@@ -13,7 +15,7 @@ import java.time.Instant;
 @Table(name = "users")
 public class User {
     @Id
-    @ColumnDefault("nextval('users_user_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
     private Integer id;
 
@@ -34,11 +36,14 @@ public class User {
     @Column(name = "active")
     private Boolean active;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "created_at")
+    @Column(name = "status")
+    private Boolean status;
+
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
     private Instant createdAt;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Instant updatedAt;
 

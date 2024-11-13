@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 
@@ -13,7 +15,7 @@ import java.time.Instant;
 @Table(name = "responsibles")
 public class Responsible {
     @Id
-    @ColumnDefault("nextval('responsibles_responsible_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "responsible_id", nullable = false)
     private Integer id;
 
@@ -31,11 +33,14 @@ public class Responsible {
     @Column(name = "role", nullable = false, length = 50)
     private String role;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "created_at")
+    @Column(name = "status")
+    private Boolean status;
+
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
     private Instant createdAt;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Instant updatedAt;
 

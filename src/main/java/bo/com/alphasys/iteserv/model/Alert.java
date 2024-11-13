@@ -1,11 +1,10 @@
 package bo.com.alphasys.iteserv.model;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 
 import java.time.Instant;
 
@@ -15,7 +14,7 @@ import java.time.Instant;
 @Table(name = "alerts")
 public class Alert {
     @Id
-    @ColumnDefault("nextval('alerts_alert_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "alert_id", nullable = false)
     private Integer id;
 
@@ -39,11 +38,14 @@ public class Alert {
     @Column(name = "resolved")
     private Boolean resolved;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @Column(name = "status")
+    private Boolean status;
+
+    @CreationTimestamp
     @Column(name = "created_at")
     private Instant createdAt;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Instant updatedAt;
 

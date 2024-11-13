@@ -1,12 +1,11 @@
 package bo.com.alphasys.iteserv.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 
@@ -16,7 +15,7 @@ import java.time.Instant;
 @Table(name = "physical_locations")
 public class PhysicalLocation {
     @Id
-    @ColumnDefault("nextval('physical_locations_location_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "location_id", nullable = false)
     private Integer id;
 
@@ -35,11 +34,14 @@ public class PhysicalLocation {
     @Column(name = "additional_details", length = Integer.MAX_VALUE)
     private String additionalDetails;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "created_at")
+    @Column(name = "status")
+    private Boolean status;
+
+    @CreationTimestamp
+    @Column(name = "created_at" , updatable = false)
     private Instant createdAt;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Instant updatedAt;
 

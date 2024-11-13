@@ -1,11 +1,10 @@
 package bo.com.alphasys.iteserv.model;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 
 import java.time.Instant;
 
@@ -15,7 +14,7 @@ import java.time.Instant;
 @Table(name = "access_logs")
 public class AccessLog {
     @Id
-    @ColumnDefault("nextval('access_logs_log_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "log_id", nullable = false)
     private Integer id;
 
@@ -34,11 +33,14 @@ public class AccessLog {
     @Column(name = "ip_address", length = 50)
     private String ipAddress;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @Column(name = "status")
+    private Boolean status;
+
+    @CreationTimestamp
     @Column(name = "created_at")
     private Instant createdAt;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Instant updatedAt;
 

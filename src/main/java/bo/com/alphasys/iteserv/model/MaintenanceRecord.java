@@ -1,11 +1,10 @@
 package bo.com.alphasys.iteserv.model;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 
 import java.time.Instant;
 
@@ -15,7 +14,7 @@ import java.time.Instant;
 @Table(name = "maintenance_records")
 public class MaintenanceRecord {
     @Id
-    @ColumnDefault("nextval('maintenance_records_maintenance_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "maintenance_id", nullable = false)
     private Integer id;
 
@@ -35,15 +34,18 @@ public class MaintenanceRecord {
     @Column(name = "maintenance_description", length = Integer.MAX_VALUE)
     private String maintenanceDescription;
 
+    @Column(name = "status")
+    private Boolean status;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "performed_by")
     private User performedBy;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @CreationTimestamp
     @Column(name = "created_at")
     private Instant createdAt;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Instant updatedAt;
 

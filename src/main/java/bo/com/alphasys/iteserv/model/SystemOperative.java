@@ -28,6 +28,9 @@ public class SystemOperative {
     @Column(name = "architecture", length = Integer.MAX_VALUE)
     private String architecture;
 
+    @Column(name = "status")
+    private Boolean status;
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private Instant createdAt;

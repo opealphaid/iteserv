@@ -1,12 +1,11 @@
 package bo.com.alphasys.iteserv.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 
@@ -16,7 +15,7 @@ import java.time.Instant;
 @Table(name = "backup_type")
 public class BackupType {
     @Id
-    @ColumnDefault("nextval('backup_type_id_backup_type_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_backup_type", nullable = false)
     private Integer id;
 
@@ -26,11 +25,11 @@ public class BackupType {
     @Column(name = "status", nullable = false)
     private Boolean status = false;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @CreationTimestamp
     @Column(name = "created_at")
     private Instant createdAt;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Instant updatedAt;
 

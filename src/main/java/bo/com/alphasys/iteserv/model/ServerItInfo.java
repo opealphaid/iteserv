@@ -1,9 +1,6 @@
 package bo.com.alphasys.iteserv.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -16,7 +13,7 @@ import java.time.Instant;
 @Table(name = "server_it_info")
 public class ServerItInfo {
     @Id
-    @ColumnDefault("nextval('server_it_info_id_server_it_info_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_server_it_info", nullable = false)
     private Integer id;
 

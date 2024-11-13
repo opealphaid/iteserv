@@ -1,11 +1,10 @@
 package bo.com.alphasys.iteserv.model;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.*;
 
 import java.time.Instant;
 
@@ -15,7 +14,7 @@ import java.time.Instant;
 @Table(name = "change_history")
 public class ChangeHistory {
     @Id
-    @ColumnDefault("nextval('change_history_change_id_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "change_id", nullable = false)
     private Integer id;
 
@@ -31,6 +30,9 @@ public class ChangeHistory {
     @Column(name = "change_description", nullable = false, length = Integer.MAX_VALUE)
     private String changeDescription;
 
+    @Column(name = "status")
+    private Boolean status;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.SET_NULL)
     @JoinColumn(name = "performed_by")
@@ -40,11 +42,11 @@ public class ChangeHistory {
     @JoinColumn(name = "change_type")
     private ChangeType changeType;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "created_at")
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
     private Instant createdAt;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Instant updatedAt;
 

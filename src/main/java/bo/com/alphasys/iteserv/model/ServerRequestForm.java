@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @Table(name = "server_request_form")
 public class ServerRequestForm {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_server_request", nullable = false)
     private Integer id;
 

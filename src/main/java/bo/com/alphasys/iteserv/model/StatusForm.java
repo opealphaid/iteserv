@@ -1,9 +1,6 @@
 package bo.com.alphasys.iteserv.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -14,7 +11,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Table(name = "status_form")
 public class StatusForm {
     @Id
-    @ColumnDefault("nextval('status_form_id_status_form_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_status_form", nullable = false)
     private Integer id;
 
